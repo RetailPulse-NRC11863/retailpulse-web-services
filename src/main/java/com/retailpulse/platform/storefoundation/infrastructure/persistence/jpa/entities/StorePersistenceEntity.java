@@ -1,0 +1,37 @@
+package com.retailpulse.platform.storefoundation.infrastructure.persistence.jpa.entities;
+
+import com.retailpulse.platform.shared.infrastructure.persistence.jpa.entities.AuditableAbstractPersistenceEntity;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "stores")
+public class StorePersistenceEntity extends AuditableAbstractPersistenceEntity {
+    private String name;
+
+    private String address;
+
+    public StorePersistenceEntity() {
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+
+}
