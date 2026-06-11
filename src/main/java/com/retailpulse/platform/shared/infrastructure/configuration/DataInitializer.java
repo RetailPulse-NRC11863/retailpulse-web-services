@@ -72,10 +72,10 @@ public class DataInitializer {
                 products.save(new Product(null, store.getId(), "Sparkling Water", "WTR-005", "Beverages", "Lemon sparkling water", new BigDecimal("4.50"), ProductStatus.ACTIVE, createdZones.get(3).getId(), new ProductLocation("C1", "S1", "Checkout fridge")))
             );
             createdProducts.forEach(product -> inventory.save(new InventoryItem(null, product.getId(), 20, 5, StockStatus.AVAILABLE)));
-            metrics.save(new ZoneMetric(null, createdZones.get(0).getId(), 82, 2.5, 30, 0.40, HeatLevel.HOT, CongestionStatus.MODERATE));
-            metrics.save(new ZoneMetric(null, createdZones.get(1).getId(), 61, 4.2, 45, 0.25, HeatLevel.WARM, CongestionStatus.LOW));
-            metrics.save(new ZoneMetric(null, createdZones.get(2).getId(), 95, 6.1, 70, 0.18, HeatLevel.HOT, CongestionStatus.HIGH));
-            metrics.save(new ZoneMetric(null, createdZones.get(3).getId(), 44, 1.8, 22, 0.65, HeatLevel.WARM, CongestionStatus.LOW));
+            metrics.save(new ZoneMetric(null, createdZones.get(0).getId(), 82, 2.5, 30, 0.40, HeatLevel.HIGH, CongestionStatus.MODERATE));
+            metrics.save(new ZoneMetric(null, createdZones.get(1).getId(), 61, 4.2, 45, 0.25, HeatLevel.MEDIUM, CongestionStatus.LOW));
+            metrics.save(new ZoneMetric(null, createdZones.get(2).getId(), 95, 6.1, 70, 0.18, HeatLevel.CRITICAL, CongestionStatus.HIGH));
+            metrics.save(new ZoneMetric(null, createdZones.get(3).getId(), 44, 1.8, 22, 0.65, HeatLevel.MEDIUM, CongestionStatus.LOW));
             alerts.save(new OperationalAlert(null, store.getId(), "Featured display congestion", "High activity detected in featured display.", AlertType.CONGESTION, AlertStatus.ACTIVE, PriorityLevel.HIGH));
             alerts.save(new OperationalAlert(null, store.getId(), "Low stock candidate", "Review checkout fridge stock.", AlertType.STOCK, AlertStatus.ACTIVE, PriorityLevel.MEDIUM));
             alerts.save(new OperationalAlert(null, store.getId(), "Customer assistance needed", "Support requested near main aisle.", AlertType.ASSISTANCE, AlertStatus.ACTIVE, PriorityLevel.MEDIUM));
