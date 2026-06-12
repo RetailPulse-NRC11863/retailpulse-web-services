@@ -30,3 +30,14 @@ http://localhost:8080/swagger-ui/index.html
 
 ## Health Check
 http://localhost:8080/api/v1/health
+
+## Traffic Analytics
+This module exposes the first real Spring Boot web services replacing JSON Server for the admin heatmap and layout views.
+
+Official endpoints:
+- GET /api/v1/zones
+- GET /api/v1/layouts/current
+- GET /api/v1/heatmap-metrics
+
+Swagger:
+http://localhost:8080/swagger-ui/index.html

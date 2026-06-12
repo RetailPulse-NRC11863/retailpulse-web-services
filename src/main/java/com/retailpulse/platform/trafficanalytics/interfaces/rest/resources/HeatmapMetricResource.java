@@ -1,6 +1,4 @@
 package com.retailpulse.platform.trafficanalytics.interfaces.rest.resources;
 
-import com.retailpulse.platform.trafficanalytics.domain.model.valueobjects.HeatLevel;
-
-public record HeatmapMetricResource(Long zoneId, Integer trafficCount, Double conversionRate, HeatLevel heatLevel) {
+public record HeatmapMetricResource(String id, String zoneId, Integer traffic, Integer averageDwellTimeSeconds, Double conversionRate, Integer intensity, Boolean attentionRequired) {
 }

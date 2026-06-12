@@ -18,7 +18,7 @@ public class TrafficAnalyticsController {
     private final MovementEventCommandService commandService;
     public TrafficAnalyticsController(TrafficAnalyticsQueryService queryService, MovementEventCommandService commandService) { this.queryService = queryService; this.commandService = commandService; }
     @GetMapping("/heatmap") @Operation(summary = "Get heatmap metrics")
-    public List<HeatmapMetricResource> heatmap() { return queryService.heatmap().stream().map(HeatmapMetricResourceFromEntityAssembler::toResource).toList(); }
+    public List<LegacyHeatmapMetricResource> heatmap() { return queryService.heatmap().stream().map(LegacyHeatmapMetricResourceFromEntityAssembler::toResource).toList(); }
     @GetMapping("/zones/metrics") @Operation(summary = "Get zone metrics")
     public List<ZoneMetricResource> zones() { return queryService.zoneMetrics().stream().map(ZoneMetricResourceFromEntityAssembler::toResource).toList(); }
     @GetMapping("/congestion") @Operation(summary = "Get congestion metrics")

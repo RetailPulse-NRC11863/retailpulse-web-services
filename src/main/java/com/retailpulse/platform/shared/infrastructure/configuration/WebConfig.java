@@ -7,13 +7,13 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
-    @Value("${retailpulse.cors.allowed-origins:http://localhost:4200,https://retailpulse-web-application.vercel.app}")
-    private String[] allowedOrigins;
+    @Value("${retailpulse.cors.allowed-origin-patterns:http://localhost:4200,https://*.vercel.app}")
+    private String[] allowedOriginPatterns;
 
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/api/v1/**")
-            .allowedOrigins(allowedOrigins)
+            .allowedOriginPatterns(allowedOriginPatterns)
             .allowedMethods("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS")
             .allowedHeaders("*")
             .allowCredentials(true);

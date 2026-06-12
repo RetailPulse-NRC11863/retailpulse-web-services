@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/zones")
-@Tag(name = "Zones")
+@RequestMapping("/api/v1/store-foundation/zones")
+@Tag(name = "Store Foundation - Zones")
 public class ZonesController {
     private final ZoneCommandService commandService;
     private final ZoneQueryService queryService;
