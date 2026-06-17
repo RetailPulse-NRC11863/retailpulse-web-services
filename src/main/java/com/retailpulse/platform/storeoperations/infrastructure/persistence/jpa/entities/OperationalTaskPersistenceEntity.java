@@ -36,7 +36,7 @@ public class OperationalTaskPersistenceEntity {
     @Column(name = "zone_name", nullable = false)
     private String zoneName;
 
-    @Column(name = "alert_id", nullable = false)
+    @Column(name = "alert_id")
     private String alertId;
 
     @Column(name = "created_at", nullable = false)

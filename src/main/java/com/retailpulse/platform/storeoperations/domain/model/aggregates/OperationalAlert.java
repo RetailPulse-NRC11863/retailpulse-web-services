@@ -25,8 +25,6 @@ public class OperationalAlert {
         validateRequired(message, "Alert message is required");
         validateRequired(zoneId, "Alert zone id is required");
         validateRequired(zoneName, "Alert zone name is required");
-        validateRequired(productId, "Alert product id is required");
-        validateRequired(productName, "Alert product name is required");
         if (type == null) throw new IllegalArgumentException("Alert type is required");
         if (priority == null) throw new IllegalArgumentException("Alert priority is required");
         if (status == null) throw new IllegalArgumentException("Alert status is required");
@@ -47,8 +45,6 @@ public class OperationalAlert {
         validateRequired(message, "Alert message is required");
         validateRequired(zoneId, "Alert zone id is required");
         validateRequired(zoneName, "Alert zone name is required");
-        validateRequired(productId, "Alert product id is required");
-        validateRequired(productName, "Alert product name is required");
         if (type == null) throw new IllegalArgumentException("Alert type is required");
         if (priority == null) throw new IllegalArgumentException("Alert priority is required");
         if (status == null) throw new IllegalArgumentException("Alert status is required");

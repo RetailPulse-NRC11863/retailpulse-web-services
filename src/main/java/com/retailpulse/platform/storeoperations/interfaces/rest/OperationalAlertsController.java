@@ -5,13 +5,14 @@ import com.retailpulse.platform.shared.interfaces.rest.resources.ErrorResource;
 import com.retailpulse.platform.shared.interfaces.rest.transform.ErrorResponseAssembler;
 import com.retailpulse.platform.storeoperations.application.commandservices.OperationalAlertCommandService;
 import com.retailpulse.platform.storeoperations.application.queryservices.OperationalAlertQueryService;
-import com.retailpulse.platform.storeoperations.domain.model.commands.ChangeOperationalAlertStatusCommand;
+import com.retailpulse.platform.storeoperations.domain.model.queries.GetActiveOperationalAlertsQuery;
 import com.retailpulse.platform.storeoperations.domain.model.queries.GetAllOperationalAlertsQuery;
 import com.retailpulse.platform.storeoperations.domain.model.queries.GetOperationalAlertByIdQuery;
 import com.retailpulse.platform.storeoperations.interfaces.rest.resources.ChangeOperationalAlertStatusResource;
 import com.retailpulse.platform.storeoperations.interfaces.rest.resources.CreateOperationalAlertResource;
 import com.retailpulse.platform.storeoperations.interfaces.rest.resources.OperationalAlertResource;
 import com.retailpulse.platform.storeoperations.interfaces.rest.resources.UpdateOperationalAlertResource;
+import com.retailpulse.platform.storeoperations.interfaces.rest.transform.ChangeOperationalAlertStatusCommandFromResourceAssembler;
 import com.retailpulse.platform.storeoperations.interfaces.rest.transform.CreateOperationalAlertCommandFromResourceAssembler;
 import com.retailpulse.platform.storeoperations.interfaces.rest.transform.OperationalAlertResourceFromEntityAssembler;
 import com.retailpulse.platform.storeoperations.interfaces.rest.transform.UpdateOperationalAlertCommandFromResourceAssembler;
@@ -58,6 +59,12 @@ public class OperationalAlertsController {
         return queryService.handle(new GetAllOperationalAlertsQuery()).stream().map(OperationalAlertResourceFromEntityAssembler::toResource).toList();
     }
 
+    @GetMapping("/active")
+    @Operation(summary = "Get active operational alerts")
+    public List<OperationalAlertResource> active() {
+        return queryService.handle(new GetActiveOperationalAlertsQuery()).stream().map(OperationalAlertResourceFromEntityAssembler::toResource).toList();
+    }
+
     @GetMapping("/{id}")
     @Operation(summary = "Get operational alert by id")
     public ResponseEntity<OperationalAlertResource> byId(@PathVariable String id) {
@@ -89,7 +96,7 @@ public class OperationalAlertsController {
     @PatchMapping("/{id}/status")
     @Operation(summary = "Change operational alert status")
     public ResponseEntity<?> changeStatus(@PathVariable String id, @Valid @RequestBody ChangeOperationalAlertStatusResource resource) {
-        var result = commandService.handle(new ChangeOperationalAlertStatusCommand(id, resource.status()));
+        var result = commandService.handle(ChangeOperationalAlertStatusCommandFromResourceAssembler.toCommand(id, resource));
         if (result.isSuccess()) return ResponseEntity.ok(OperationalAlertResourceFromEntityAssembler.toResource(result.value().orElseThrow()));
         return mapError(result.error().orElseThrow());
     }

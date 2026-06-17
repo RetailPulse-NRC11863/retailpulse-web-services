@@ -5,13 +5,14 @@ import com.retailpulse.platform.shared.interfaces.rest.resources.ErrorResource;
 import com.retailpulse.platform.shared.interfaces.rest.transform.ErrorResponseAssembler;
 import com.retailpulse.platform.storeoperations.application.commandservices.OperationalTaskCommandService;
 import com.retailpulse.platform.storeoperations.application.queryservices.OperationalTaskQueryService;
-import com.retailpulse.platform.storeoperations.domain.model.commands.ChangeOperationalTaskStatusCommand;
 import com.retailpulse.platform.storeoperations.domain.model.queries.GetAllOperationalTasksQuery;
 import com.retailpulse.platform.storeoperations.domain.model.queries.GetOperationalTaskByIdQuery;
+import com.retailpulse.platform.storeoperations.domain.model.queries.GetPendingOperationalTasksQuery;
 import com.retailpulse.platform.storeoperations.interfaces.rest.resources.ChangeOperationalTaskStatusResource;
 import com.retailpulse.platform.storeoperations.interfaces.rest.resources.CreateOperationalTaskResource;
 import com.retailpulse.platform.storeoperations.interfaces.rest.resources.OperationalTaskResource;
 import com.retailpulse.platform.storeoperations.interfaces.rest.resources.UpdateOperationalTaskResource;
+import com.retailpulse.platform.storeoperations.interfaces.rest.transform.ChangeOperationalTaskStatusCommandFromResourceAssembler;
 import com.retailpulse.platform.storeoperations.interfaces.rest.transform.CreateOperationalTaskCommandFromResourceAssembler;
 import com.retailpulse.platform.storeoperations.interfaces.rest.transform.OperationalTaskResourceFromEntityAssembler;
 import com.retailpulse.platform.storeoperations.interfaces.rest.transform.UpdateOperationalTaskCommandFromResourceAssembler;
@@ -58,6 +59,12 @@ public class OperationalTasksController {
         return queryService.handle(new GetAllOperationalTasksQuery()).stream().map(OperationalTaskResourceFromEntityAssembler::toResource).toList();
     }
 
+    @GetMapping("/pending")
+    @Operation(summary = "Get pending operational tasks")
+    public List<OperationalTaskResource> pending() {
+        return queryService.handle(new GetPendingOperationalTasksQuery()).stream().map(OperationalTaskResourceFromEntityAssembler::toResource).toList();
+    }
+
     @GetMapping("/{id}")
     @Operation(summary = "Get operational task by id")
     public ResponseEntity<OperationalTaskResource> byId(@PathVariable String id) {
@@ -89,7 +96,7 @@ public class OperationalTasksController {
     @PatchMapping("/{id}/status")
     @Operation(summary = "Change operational task status")
     public ResponseEntity<?> changeStatus(@PathVariable String id, @Valid @RequestBody ChangeOperationalTaskStatusResource resource) {
-        var result = commandService.handle(new ChangeOperationalTaskStatusCommand(id, resource.status()));
+        var result = commandService.handle(ChangeOperationalTaskStatusCommandFromResourceAssembler.toCommand(id, resource));
         if (result.isSuccess()) return ResponseEntity.ok(OperationalTaskResourceFromEntityAssembler.toResource(result.value().orElseThrow()));
         return mapError(result.error().orElseThrow());
     }

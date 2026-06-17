@@ -38,10 +38,10 @@ public class OperationalAlertPersistenceEntity {
     @Column(name = "zone_name", nullable = false)
     private String zoneName;
 
-    @Column(name = "product_id", nullable = false)
+    @Column(name = "product_id")
     private String productId;
 
-    @Column(name = "product_name", nullable = false)
+    @Column(name = "product_name")
     private String productName;
 
     @Column(name = "created_at", nullable = false)

@@ -24,7 +24,6 @@ public class OperationalTask {
         validateRequired(description, "Task description is required");
         validateRequired(zoneId, "Task zone id is required");
         validateRequired(zoneName, "Task zone name is required");
-        validateRequired(alertId, "Task alert id is required");
         if (priority == null) throw new IllegalArgumentException("Task priority is required");
         if (status == null) throw new IllegalArgumentException("Task status is required");
         if (createdAt == null) throw new IllegalArgumentException("Task createdAt is required");
@@ -44,7 +43,6 @@ public class OperationalTask {
         validateRequired(description, "Task description is required");
         validateRequired(zoneId, "Task zone id is required");
         validateRequired(zoneName, "Task zone name is required");
-        validateRequired(alertId, "Task alert id is required");
         if (priority == null) throw new IllegalArgumentException("Task priority is required");
         if (status == null) throw new IllegalArgumentException("Task status is required");
         this.title = title;
