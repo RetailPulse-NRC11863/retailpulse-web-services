@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/promotion-recommendations")
+@RequestMapping({"/api/v1/promotion-recommendations", "/api/v1/recommendations"})
 @Tag(name = "Promotion Recommendations")
 public class PromotionRecommendationsController {
     private final PromotionRecommendationCommandService commandService;
