@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/products")
-@Tag(name = "Products")
+@RequestMapping("/api/v1/store-foundation/products")
+@Tag(name = "Store Foundation - Products")
 public class ProductsController {
     private final ProductCommandService commandService;
     private final ProductQueryService queryService;

@@ -10,7 +10,7 @@ import java.math.BigDecimal;
 import com.retailpulse.platform.storefoundation.domain.model.valueobjects.ProductStatus;
 
 @Entity
-@Table(name = "products")
+@Table(name = "store_foundation_products")
 public class ProductPersistenceEntity extends AuditableAbstractPersistenceEntity {
     private Long storeId;
 
