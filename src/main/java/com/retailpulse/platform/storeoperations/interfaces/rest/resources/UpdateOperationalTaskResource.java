@@ -4,7 +4,6 @@ import com.retailpulse.platform.storeoperations.domain.model.valueobjects.Priori
 import com.retailpulse.platform.storeoperations.domain.model.valueobjects.TaskStatus;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import java.time.Instant;
 
-public record CreateOperationalTaskResource(@NotBlank String id, @NotBlank String title, @NotBlank String description, @NotNull PriorityLevel priority, @NotNull TaskStatus status, @NotBlank String zoneId, @NotBlank String zoneName, @NotBlank String alertId, @NotNull Instant createdAt) {
+public record UpdateOperationalTaskResource(@NotBlank String title, @NotBlank String description, @NotNull PriorityLevel priority, @NotNull TaskStatus status, @NotBlank String zoneId, @NotBlank String zoneName, @NotBlank String alertId) {
 }

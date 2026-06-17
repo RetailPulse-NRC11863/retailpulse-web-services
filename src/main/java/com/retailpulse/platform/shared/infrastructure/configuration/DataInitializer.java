@@ -38,6 +38,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 import java.math.BigDecimal;
+import java.time.Instant;
 import java.util.List;
 
 @Configuration
@@ -76,12 +77,12 @@ public class DataInitializer {
             metrics.save(new ZoneMetric(null, createdZones.get(1).getId(), 61, 4.2, 45, 0.25, HeatLevel.MEDIUM, CongestionStatus.LOW));
             metrics.save(new ZoneMetric(null, createdZones.get(2).getId(), 95, 6.1, 70, 0.18, HeatLevel.CRITICAL, CongestionStatus.HIGH));
             metrics.save(new ZoneMetric(null, createdZones.get(3).getId(), 44, 1.8, 22, 0.65, HeatLevel.MEDIUM, CongestionStatus.LOW));
-            alerts.save(new OperationalAlert(null, store.getId(), "Featured display congestion", "High activity detected in featured display.", AlertType.CONGESTION, AlertStatus.ACTIVE, PriorityLevel.HIGH));
-            alerts.save(new OperationalAlert(null, store.getId(), "Low stock candidate", "Review checkout fridge stock.", AlertType.STOCK, AlertStatus.ACTIVE, PriorityLevel.MEDIUM));
-            alerts.save(new OperationalAlert(null, store.getId(), "Customer assistance needed", "Support requested near main aisle.", AlertType.ASSISTANCE, AlertStatus.ACTIVE, PriorityLevel.MEDIUM));
-            tasks.save(new OperationalTask(null, store.getId(), "Restock almond milk", "Move stock from storage to main aisle.", TaskStatus.PENDING, PriorityLevel.MEDIUM));
-            tasks.save(new OperationalTask(null, store.getId(), "Inspect featured display", "Check pricing and signage.", TaskStatus.PENDING, PriorityLevel.HIGH));
-            tasks.save(new OperationalTask(null, store.getId(), "Clean checkout fridge", "Prepare fridge before afternoon peak.", TaskStatus.PENDING, PriorityLevel.LOW));
+            alerts.save(new OperationalAlert("A900", AlertType.CONGESTION, PriorityLevel.HIGH, AlertStatus.PENDING, "High activity detected in featured display.", "Z900", "Featured Display", "P900", "Demo product", Instant.parse("2026-05-04T09:00:00Z")));
+            alerts.save(new OperationalAlert("A901", AlertType.LOW_STOCK, PriorityLevel.MEDIUM, AlertStatus.IN_PROGRESS, "Review checkout fridge stock.", "Z901", "Checkout", "P901", "Demo stock item", Instant.parse("2026-05-04T09:30:00Z")));
+            alerts.save(new OperationalAlert("A902", AlertType.CUSTOMER_ASSISTANCE, PriorityLevel.MEDIUM, AlertStatus.PENDING, "Support requested near main aisle.", "Z902", "Main Aisle", "P902", "Assisted product", Instant.parse("2026-05-04T10:00:00Z")));
+            tasks.save(new OperationalTask("T900", "Restock almond milk", "Move stock from storage to main aisle.", PriorityLevel.MEDIUM, TaskStatus.PENDING, "Z902", "Main Aisle", "A901", Instant.parse("2026-05-04T09:35:00Z")));
+            tasks.save(new OperationalTask("T901", "Inspect featured display", "Check pricing and signage.", PriorityLevel.HIGH, TaskStatus.PENDING, "Z900", "Featured Display", "A900", Instant.parse("2026-05-04T09:05:00Z")));
+            tasks.save(new OperationalTask("T902", "Clean checkout fridge", "Prepare fridge before afternoon peak.", PriorityLevel.LOW, TaskStatus.PENDING, "Z901", "Checkout", "A902", Instant.parse("2026-05-04T10:05:00Z")));
             plans.save(new SubscriptionPlan(null, PlanName.STARTER, new BigDecimal("49.00"), BillingPeriod.MONTHLY, 1, "Basic analytics for one store."));
             plans.save(new SubscriptionPlan(null, PlanName.GROWTH, new BigDecimal("129.00"), BillingPeriod.MONTHLY, 5, "Advanced analytics and operations."));
             plans.save(new SubscriptionPlan(null, PlanName.PREMIUM, new BigDecimal("299.00"), BillingPeriod.MONTHLY, 20, "Full RetailPulse intelligence suite."));

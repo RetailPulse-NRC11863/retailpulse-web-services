@@ -4,5 +4,18 @@ import com.retailpulse.platform.storeoperations.domain.model.aggregates.Operatio
 import com.retailpulse.platform.storeoperations.interfaces.rest.resources.OperationalAlertResource;
 
 public class OperationalAlertResourceFromEntityAssembler {
-    public static OperationalAlertResource toResource(OperationalAlert a) { return new OperationalAlertResource(a.getId(), a.getStoreId(), a.getTitle(), a.getDescription(), a.getType(), a.getStatus(), a.getPriority()); }
+    public static OperationalAlertResource toResource(OperationalAlert alert) {
+        return new OperationalAlertResource(
+            alert.getId(),
+            alert.getType(),
+            alert.getPriority(),
+            alert.getStatus(),
+            alert.getMessage(),
+            alert.getZoneId(),
+            alert.getZoneName(),
+            alert.getProductId(),
+            alert.getProductName(),
+            alert.getCreatedAt()
+        );
+    }
 }

@@ -5,9 +5,9 @@ import java.util.List;
 import java.util.Optional;
 
 public interface OperationalTaskRepository {
-    OperationalTask save(OperationalTask task);
     List<OperationalTask> findAll();
+    Optional<OperationalTask> findById(String id);
     List<OperationalTask> findPending();
-    Optional<OperationalTask> findById(Long taskId);
-    long count();
+    OperationalTask save(OperationalTask task);
+    boolean existsById(String id);
 }

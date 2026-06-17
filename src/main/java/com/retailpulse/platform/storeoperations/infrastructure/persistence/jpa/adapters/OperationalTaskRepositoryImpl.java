@@ -13,10 +13,28 @@ import java.util.Optional;
 public class OperationalTaskRepositoryImpl implements OperationalTaskRepository {
     private final OperationalTaskPersistenceRepository repository;
     private final OperationalTaskPersistenceAssembler assembler = new OperationalTaskPersistenceAssembler();
-    public OperationalTaskRepositoryImpl(OperationalTaskPersistenceRepository repository) { this.repository = repository; }
-    public OperationalTask save(OperationalTask task) { return assembler.toDomain(repository.save(assembler.toEntity(task))); }
-    public List<OperationalTask> findAll() { return repository.findAll().stream().map(assembler::toDomain).toList(); }
-    public List<OperationalTask> findPending() { return repository.findByStatus(TaskStatus.PENDING).stream().map(assembler::toDomain).toList(); }
-    public Optional<OperationalTask> findById(Long taskId) { return repository.findById(taskId).map(assembler::toDomain); }
-    public long count() { return repository.count(); }
+
+    public OperationalTaskRepositoryImpl(OperationalTaskPersistenceRepository repository) {
+        this.repository = repository;
+    }
+
+    public List<OperationalTask> findAll() {
+        return repository.findAll().stream().map(assembler::toDomain).toList();
+    }
+
+    public Optional<OperationalTask> findById(String id) {
+        return repository.findById(id).map(assembler::toDomain);
+    }
+
+    public List<OperationalTask> findPending() {
+        return repository.findByStatusIn(List.of(TaskStatus.PENDING, TaskStatus.IN_PROGRESS)).stream().map(assembler::toDomain).toList();
+    }
+
+    public OperationalTask save(OperationalTask task) {
+        return assembler.toDomain(repository.save(assembler.toEntity(task)));
+    }
+
+    public boolean existsById(String id) {
+        return repository.existsById(id);
+    }
 }

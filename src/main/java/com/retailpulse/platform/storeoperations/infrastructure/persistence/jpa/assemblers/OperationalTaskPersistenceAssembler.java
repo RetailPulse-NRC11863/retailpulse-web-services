@@ -4,6 +4,31 @@ import com.retailpulse.platform.storeoperations.domain.model.aggregates.Operatio
 import com.retailpulse.platform.storeoperations.infrastructure.persistence.jpa.entities.OperationalTaskPersistenceEntity;
 
 public class OperationalTaskPersistenceAssembler {
-    public OperationalTask toDomain(OperationalTaskPersistenceEntity e) { return new OperationalTask(e.getId(), e.getStoreId(), e.getTitle(), e.getDescription(), e.getStatus(), e.getPriority()); }
-    public OperationalTaskPersistenceEntity toEntity(OperationalTask t) { OperationalTaskPersistenceEntity e = new OperationalTaskPersistenceEntity(); e.setId(t.getId()); e.setStoreId(t.getStoreId()); e.setTitle(t.getTitle()); e.setDescription(t.getDescription()); e.setStatus(t.getStatus()); e.setPriority(t.getPriority()); return e; }
+    public OperationalTask toDomain(OperationalTaskPersistenceEntity entity) {
+        return new OperationalTask(
+            entity.getId(),
+            entity.getTitle(),
+            entity.getDescription(),
+            entity.getPriority(),
+            entity.getStatus(),
+            entity.getZoneId(),
+            entity.getZoneName(),
+            entity.getAlertId(),
+            entity.getCreatedAt()
+        );
+    }
+
+    public OperationalTaskPersistenceEntity toEntity(OperationalTask task) {
+        OperationalTaskPersistenceEntity entity = new OperationalTaskPersistenceEntity();
+        entity.setId(task.getId());
+        entity.setTitle(task.getTitle());
+        entity.setDescription(task.getDescription());
+        entity.setPriority(task.getPriority());
+        entity.setStatus(task.getStatus());
+        entity.setZoneId(task.getZoneId());
+        entity.setZoneName(task.getZoneName());
+        entity.setAlertId(task.getAlertId());
+        entity.setCreatedAt(task.getCreatedAt());
+        return entity;
+    }
 }

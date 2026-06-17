@@ -2,7 +2,6 @@ package com.retailpulse.platform.storeoperations.domain.model.commands;
 
 import com.retailpulse.platform.storeoperations.domain.model.valueobjects.PriorityLevel;
 import com.retailpulse.platform.storeoperations.domain.model.valueobjects.TaskStatus;
-import java.time.Instant;
 
-public record CreateOperationalTaskCommand(String id, String title, String description, PriorityLevel priority, TaskStatus status, String zoneId, String zoneName, String alertId, Instant createdAt) {
+public record UpdateOperationalTaskCommand(String id, String title, String description, PriorityLevel priority, TaskStatus status, String zoneId, String zoneName, String alertId) {
 }

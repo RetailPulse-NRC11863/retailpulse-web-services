@@ -4,5 +4,7 @@ import com.retailpulse.platform.storeoperations.domain.model.commands.CreateOper
 import com.retailpulse.platform.storeoperations.interfaces.rest.resources.CreateOperationalTaskResource;
 
 public class CreateOperationalTaskCommandFromResourceAssembler {
-    public static CreateOperationalTaskCommand toCommand(CreateOperationalTaskResource r) { return new CreateOperationalTaskCommand(r.storeId(), r.title(), r.description(), r.priority()); }
+    public static CreateOperationalTaskCommand toCommand(CreateOperationalTaskResource resource) {
+        return new CreateOperationalTaskCommand(resource.id(), resource.title(), resource.description(), resource.priority(), resource.status(), resource.zoneId(), resource.zoneName(), resource.alertId(), resource.createdAt());
+    }
 }

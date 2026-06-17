@@ -5,9 +5,9 @@ import java.util.List;
 import java.util.Optional;
 
 public interface OperationalAlertRepository {
-    OperationalAlert save(OperationalAlert alert);
     List<OperationalAlert> findAll();
+    Optional<OperationalAlert> findById(String id);
     List<OperationalAlert> findActive();
-    Optional<OperationalAlert> findById(Long alertId);
-    long count();
+    OperationalAlert save(OperationalAlert alert);
+    boolean existsById(String id);
 }

@@ -5,7 +5,6 @@ import com.retailpulse.platform.storeoperations.domain.model.valueobjects.AlertT
 import com.retailpulse.platform.storeoperations.domain.model.valueobjects.PriorityLevel;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import java.time.Instant;
 
-public record CreateOperationalAlertResource(@NotBlank String id, @NotNull AlertType type, @NotNull PriorityLevel priority, @NotNull AlertStatus status, @NotBlank String message, @NotBlank String zoneId, @NotBlank String zoneName, @NotBlank String productId, @NotBlank String productName, @NotNull Instant createdAt) {
+public record UpdateOperationalAlertResource(@NotNull AlertType type, @NotNull PriorityLevel priority, @NotNull AlertStatus status, @NotBlank String message, @NotBlank String zoneId, @NotBlank String zoneName, @NotBlank String productId, @NotBlank String productName) {
 }

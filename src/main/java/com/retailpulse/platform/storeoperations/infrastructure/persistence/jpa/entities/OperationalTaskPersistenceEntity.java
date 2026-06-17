@@ -1,39 +1,53 @@
 package com.retailpulse.platform.storeoperations.infrastructure.persistence.jpa.entities;
 
-import com.retailpulse.platform.shared.infrastructure.persistence.jpa.entities.AuditableAbstractPersistenceEntity;
+import com.retailpulse.platform.storeoperations.domain.model.valueobjects.PriorityLevel;
+import com.retailpulse.platform.storeoperations.domain.model.valueobjects.TaskStatus;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import com.retailpulse.platform.storeoperations.domain.model.valueobjects.TaskStatus;
-import com.retailpulse.platform.storeoperations.domain.model.valueobjects.PriorityLevel;
+import java.time.Instant;
 
 @Entity
 @Table(name = "operational_tasks")
-public class OperationalTaskPersistenceEntity extends AuditableAbstractPersistenceEntity {
-    private Long storeId;
+public class OperationalTaskPersistenceEntity {
+    @Id
+    private String id;
 
+    @Column(nullable = false)
     private String title;
 
-    @Column(length = 1000)
+    @Column(nullable = false, length = 1000)
     private String description;
 
     @Enumerated(EnumType.STRING)
-    private TaskStatus status;
-
-    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
     private PriorityLevel priority;
 
-    public OperationalTaskPersistenceEntity() {
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private TaskStatus status;
+
+    @Column(name = "zone_id", nullable = false)
+    private String zoneId;
+
+    @Column(name = "zone_name", nullable = false)
+    private String zoneName;
+
+    @Column(name = "alert_id", nullable = false)
+    private String alertId;
+
+    @Column(name = "created_at", nullable = false)
+    private Instant createdAt;
+
+    public String getId() {
+        return id;
     }
 
-    public Long getStoreId() {
-        return storeId;
-    }
-
-    public void setStoreId(Long storeId) {
-        this.storeId = storeId;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getTitle() {
@@ -52,14 +66,6 @@ public class OperationalTaskPersistenceEntity extends AuditableAbstractPersisten
         this.description = description;
     }
 
-    public TaskStatus getStatus() {
-        return status;
-    }
-
-    public void setStatus(TaskStatus status) {
-        this.status = status;
-    }
-
     public PriorityLevel getPriority() {
         return priority;
     }
@@ -68,5 +74,43 @@ public class OperationalTaskPersistenceEntity extends AuditableAbstractPersisten
         this.priority = priority;
     }
 
+    public TaskStatus getStatus() {
+        return status;
+    }
 
+    public void setStatus(TaskStatus status) {
+        this.status = status;
+    }
+
+    public String getZoneId() {
+        return zoneId;
+    }
+
+    public void setZoneId(String zoneId) {
+        this.zoneId = zoneId;
+    }
+
+    public String getZoneName() {
+        return zoneName;
+    }
+
+    public void setZoneName(String zoneName) {
+        this.zoneName = zoneName;
+    }
+
+    public String getAlertId() {
+        return alertId;
+    }
+
+    public void setAlertId(String alertId) {
+        this.alertId = alertId;
+    }
+
+    public Instant getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Instant createdAt) {
+        this.createdAt = createdAt;
+    }
 }

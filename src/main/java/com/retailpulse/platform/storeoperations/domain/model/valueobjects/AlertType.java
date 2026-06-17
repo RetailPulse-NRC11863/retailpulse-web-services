@@ -1,8 +1,9 @@
 package com.retailpulse.platform.storeoperations.domain.model.valueobjects;
 
 public enum AlertType {
-    STOCK,
+    OUT_OF_STOCK,
+    LOW_STOCK,
     CONGESTION,
-    ASSISTANCE,
-    COMMERCIAL
+    CUSTOMER_ASSISTANCE,
+    OTHER
 }

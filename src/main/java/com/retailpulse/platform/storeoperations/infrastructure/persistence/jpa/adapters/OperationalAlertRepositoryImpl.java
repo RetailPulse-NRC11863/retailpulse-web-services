@@ -13,10 +13,28 @@ import java.util.Optional;
 public class OperationalAlertRepositoryImpl implements OperationalAlertRepository {
     private final OperationalAlertPersistenceRepository repository;
     private final OperationalAlertPersistenceAssembler assembler = new OperationalAlertPersistenceAssembler();
-    public OperationalAlertRepositoryImpl(OperationalAlertPersistenceRepository repository) { this.repository = repository; }
-    public OperationalAlert save(OperationalAlert alert) { return assembler.toDomain(repository.save(assembler.toEntity(alert))); }
-    public List<OperationalAlert> findAll() { return repository.findAll().stream().map(assembler::toDomain).toList(); }
-    public List<OperationalAlert> findActive() { return repository.findByStatus(AlertStatus.ACTIVE).stream().map(assembler::toDomain).toList(); }
-    public Optional<OperationalAlert> findById(Long alertId) { return repository.findById(alertId).map(assembler::toDomain); }
-    public long count() { return repository.count(); }
+
+    public OperationalAlertRepositoryImpl(OperationalAlertPersistenceRepository repository) {
+        this.repository = repository;
+    }
+
+    public List<OperationalAlert> findAll() {
+        return repository.findAll().stream().map(assembler::toDomain).toList();
+    }
+
+    public Optional<OperationalAlert> findById(String id) {
+        return repository.findById(id).map(assembler::toDomain);
+    }
+
+    public List<OperationalAlert> findActive() {
+        return repository.findByStatusIn(List.of(AlertStatus.PENDING, AlertStatus.IN_PROGRESS)).stream().map(assembler::toDomain).toList();
+    }
+
+    public OperationalAlert save(OperationalAlert alert) {
+        return assembler.toDomain(repository.save(assembler.toEntity(alert)));
+    }
+
+    public boolean existsById(String id) {
+        return repository.existsById(id);
+    }
 }

@@ -1,10 +1,13 @@
 package com.retailpulse.platform.storeoperations.application.commandservices;
 
+import com.retailpulse.platform.shared.application.result.Result;
 import com.retailpulse.platform.storeoperations.domain.model.aggregates.OperationalAlert;
+import com.retailpulse.platform.storeoperations.domain.model.commands.ChangeOperationalAlertStatusCommand;
 import com.retailpulse.platform.storeoperations.domain.model.commands.CreateOperationalAlertCommand;
-import com.retailpulse.platform.storeoperations.domain.model.commands.ResolveOperationalAlertCommand;
+import com.retailpulse.platform.storeoperations.domain.model.commands.UpdateOperationalAlertCommand;
 
 public interface OperationalAlertCommandService {
-    OperationalAlert handle(CreateOperationalAlertCommand command);
-    OperationalAlert handle(ResolveOperationalAlertCommand command);
+    Result<OperationalAlert> handle(CreateOperationalAlertCommand command);
+    Result<OperationalAlert> handle(UpdateOperationalAlertCommand command);
+    Result<OperationalAlert> handle(ChangeOperationalAlertStatusCommand command);
 }
