@@ -20,7 +20,7 @@ public class ProductCommandServiceImpl implements ProductCommandService {
 
     public Result<Product> handle(CreateProductCommand command) {
         if (repository.existsById(command.id())) {
-            return Result.failure(ApplicationError.validation("Product already exists"));
+            return Result.failure(new ApplicationError("conflict", "Product already exists"));
         }
         try {
             Product product = new Product(command.id(), command.name(), command.category(), command.price(), command.stock(), command.zoneName(), command.shelfReference(), command.promotion());

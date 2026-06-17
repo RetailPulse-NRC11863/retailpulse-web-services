@@ -42,7 +42,8 @@ import java.util.List;
     @ApiResponse(responseCode = "201", description = "Resource created successfully"),
     @ApiResponse(responseCode = "204", description = "Resource deleted successfully"),
     @ApiResponse(responseCode = "400", description = "Invalid request body"),
-    @ApiResponse(responseCode = "404", description = "Resource not found")
+    @ApiResponse(responseCode = "404", description = "Resource not found"),
+    @ApiResponse(responseCode = "409", description = "Resource conflict")
 })
 public class ProductsController {
     private final ProductCommandService commandService;
@@ -82,7 +83,9 @@ public class ProductsController {
             ProductResource body = ProductResourceFromEntityAssembler.toResource(result.value().orElseThrow());
             return ResponseEntity.created(URI.create("/api/v1/products/" + body.id())).body(body);
         }
-        return badRequest(result.error().orElseThrow());
+        ApplicationError error = result.error().orElseThrow();
+        if ("conflict".equals(error.code())) return conflict(error);
+        return badRequest(error);
     }
 
     @PutMapping("/{id}")
@@ -111,5 +114,9 @@ public class ProductsController {
 
     private ResponseEntity<ErrorResource> notFound(ApplicationError error) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ErrorResponseAssembler.toResource(error.code(), error.message(), List.of()));
+    }
+
+    private ResponseEntity<ErrorResource> conflict(ApplicationError error) {
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(ErrorResponseAssembler.toResource(error.code(), error.message(), List.of()));
     }
 }
