@@ -25,6 +25,17 @@ public class OperationalTaskPersistenceEntity extends AuditableAbstractPersisten
     @Enumerated(EnumType.STRING)
     private PriorityLevel priority;
 
+    private Long alertId;
+
+    private Long productId;
+
+    private Long zoneId;
+
+    private String source;
+
+    @Column(length = 1000)
+    private String triggerReason;
+
     public OperationalTaskPersistenceEntity() {
     }
 
@@ -68,5 +79,44 @@ public class OperationalTaskPersistenceEntity extends AuditableAbstractPersisten
         this.priority = priority;
     }
 
+    public Long getAlertId() {
+        return alertId;
+    }
+
+    public void setAlertId(Long alertId) {
+        this.alertId = alertId;
+    }
+
+    public Long getProductId() {
+        return productId;
+    }
+
+    public void setProductId(Long productId) {
+        this.productId = productId;
+    }
+
+    public Long getZoneId() {
+        return zoneId;
+    }
+
+    public void setZoneId(Long zoneId) {
+        this.zoneId = zoneId;
+    }
+
+    public String getSource() {
+        return source;
+    }
+
+    public void setSource(String source) {
+        this.source = source;
+    }
+
+    public String getTriggerReason() {
+        return triggerReason;
+    }
+
+    public void setTriggerReason(String triggerReason) {
+        this.triggerReason = triggerReason;
+    }
 
 }

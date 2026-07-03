@@ -5,7 +5,7 @@ import com.retailpulse.platform.storefoundation.infrastructure.persistence.jpa.e
 
 public class ZonePersistenceAssembler {
     public Zone toDomain(ZonePersistenceEntity entity) {
-        return new Zone(entity.getId(), entity.getStoreId(), entity.getName(), entity.getType(), entity.getCapacity());
+        return new Zone(entity.getId(), entity.getStoreId(), entity.getName(), entity.getType(), entity.getCapacity(), entity.getX(), entity.getY(), entity.getWidth(), entity.getHeight());
     }
     public ZonePersistenceEntity toEntity(Zone zone) {
         ZonePersistenceEntity entity = new ZonePersistenceEntity();
@@ -14,6 +14,10 @@ public class ZonePersistenceAssembler {
         entity.setName(zone.getName());
         entity.setType(zone.getType());
         entity.setCapacity(zone.getCapacity());
+        entity.setX(zone.getX());
+        entity.setY(zone.getY());
+        entity.setWidth(zone.getWidth());
+        entity.setHeight(zone.getHeight());
         return entity;
     }
 }

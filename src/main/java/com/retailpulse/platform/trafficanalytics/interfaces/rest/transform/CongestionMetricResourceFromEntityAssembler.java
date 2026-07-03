@@ -4,5 +4,13 @@ import com.retailpulse.platform.trafficanalytics.domain.model.aggregates.ZoneMet
 import com.retailpulse.platform.trafficanalytics.interfaces.rest.resources.CongestionMetricResource;
 
 public class CongestionMetricResourceFromEntityAssembler {
-    public static CongestionMetricResource toResource(ZoneMetric metric) { return new CongestionMetricResource(metric.getZoneId(), metric.getCongestionStatus(), metric.getTrafficCount()); }
+    public static CongestionMetricResource toResource(ZoneMetric metric) {
+        return new CongestionMetricResource(
+            metric.getZoneId(),
+            metric.getCongestionStatus(),
+            metric.getTrafficCount(),
+            metric.getInteractionCount(),
+            metric.getConversionRate()
+        );
+    }
 }

@@ -4,5 +4,5 @@ import com.retailpulse.platform.storefoundation.domain.model.commands.CreateStor
 import com.retailpulse.platform.storefoundation.interfaces.rest.resources.CreateStoreResource;
 
 public class CreateStoreCommandFromResourceAssembler {
-    public static CreateStoreCommand toCommand(CreateStoreResource resource) { return new CreateStoreCommand(resource.name(), resource.address()); }
+    public static CreateStoreCommand toCommand(CreateStoreResource resource) { return new CreateStoreCommand(resource.name(), resource.address(), resource.managerName(), resource.status()); }
 }

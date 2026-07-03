@@ -14,6 +14,10 @@ public class StorePersistenceEntity extends AuditableAbstractPersistenceEntity {
 
     private String address;
 
+    private String managerName;
+
+    private String status;
+
     public StorePersistenceEntity() {
     }
 
@@ -33,5 +37,19 @@ public class StorePersistenceEntity extends AuditableAbstractPersistenceEntity {
         this.address = address;
     }
 
+    public String getManagerName() {
+        return managerName;
+    }
 
+    public void setManagerName(String managerName) {
+        this.managerName = managerName;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
 }

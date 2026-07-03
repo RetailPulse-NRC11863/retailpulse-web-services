@@ -12,6 +12,6 @@ import org.springframework.stereotype.Service;
 public class OperationalAlertCommandServiceImpl implements OperationalAlertCommandService {
     private final OperationalAlertRepository repository;
     public OperationalAlertCommandServiceImpl(OperationalAlertRepository repository) { this.repository = repository; }
-    public OperationalAlert handle(CreateOperationalAlertCommand c) { return repository.save(new OperationalAlert(null, c.storeId(), c.title(), c.description(), c.type(), AlertStatus.ACTIVE, c.priority())); }
+    public OperationalAlert handle(CreateOperationalAlertCommand c) { return repository.save(new OperationalAlert(null, c.storeId(), c.title(), c.description(), c.type(), AlertStatus.ACTIVE, c.priority(), c.productId(), c.zoneId(), c.source(), c.triggerReason())); }
     public OperationalAlert handle(ResolveOperationalAlertCommand c) { OperationalAlert a = repository.findById(c.alertId()).orElseThrow(() -> new IllegalArgumentException("Alert not found")); a.resolve(); return repository.save(a); }
 }

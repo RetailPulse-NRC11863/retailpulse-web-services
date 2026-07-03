@@ -4,5 +4,5 @@ import com.retailpulse.platform.storeoperations.domain.model.valueobjects.Priori
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
-public record CreateOperationalTaskResource(@NotNull Long storeId, @NotBlank String title, String description, @NotNull PriorityLevel priority) {
+public record CreateOperationalTaskResource(@NotNull Long storeId, @NotBlank String title, String description, @NotNull PriorityLevel priority, Long alertId, Long productId, Long zoneId, String source, String triggerReason) {
 }

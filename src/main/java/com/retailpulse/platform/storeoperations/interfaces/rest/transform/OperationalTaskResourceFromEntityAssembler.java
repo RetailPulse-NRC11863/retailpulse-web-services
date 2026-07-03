@@ -4,5 +4,5 @@ import com.retailpulse.platform.storeoperations.domain.model.aggregates.Operatio
 import com.retailpulse.platform.storeoperations.interfaces.rest.resources.OperationalTaskResource;
 
 public class OperationalTaskResourceFromEntityAssembler {
-    public static OperationalTaskResource toResource(OperationalTask t) { return new OperationalTaskResource(t.getId(), t.getStoreId(), t.getTitle(), t.getDescription(), t.getStatus(), t.getPriority()); }
+    public static OperationalTaskResource toResource(OperationalTask t) { return new OperationalTaskResource(t.getId(), t.getStoreId(), t.getTitle(), t.getDescription(), t.getStatus(), t.getPriority(), t.getAlertId(), t.getProductId(), t.getZoneId(), t.getSource(), t.getTriggerReason()); }
 }

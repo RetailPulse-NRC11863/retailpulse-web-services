@@ -15,6 +15,7 @@ public class SaasAccountRepositoryImpl implements SaasAccountRepository {
     public SaasAccountRepositoryImpl(SaasAccountPersistenceRepository repository) { this.repository = repository; }
     public SaasAccount save(SaasAccount account) { return assembler.toDomain(repository.save(assembler.toEntity(account))); }
     public Optional<SaasAccount> findById(Long accountId) { return repository.findById(accountId).map(assembler::toDomain); }
+    public Optional<SaasAccount> findByOwnerEmail(String ownerEmail) { return repository.findFirstByOwnerEmailIgnoreCase(ownerEmail).map(assembler::toDomain); }
     public Optional<SaasAccount> findFirst() { return repository.findAll(PageRequest.of(0, 1)).stream().findFirst().map(assembler::toDomain); }
     public long count() { return repository.count(); }
 }

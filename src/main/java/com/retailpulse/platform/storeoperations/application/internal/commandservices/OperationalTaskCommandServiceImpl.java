@@ -12,6 +12,6 @@ import org.springframework.stereotype.Service;
 public class OperationalTaskCommandServiceImpl implements OperationalTaskCommandService {
     private final OperationalTaskRepository repository;
     public OperationalTaskCommandServiceImpl(OperationalTaskRepository repository) { this.repository = repository; }
-    public OperationalTask handle(CreateOperationalTaskCommand c) { return repository.save(new OperationalTask(null, c.storeId(), c.title(), c.description(), TaskStatus.PENDING, c.priority())); }
+    public OperationalTask handle(CreateOperationalTaskCommand c) { return repository.save(new OperationalTask(null, c.storeId(), c.title(), c.description(), TaskStatus.PENDING, c.priority(), c.alertId(), c.productId(), c.zoneId(), c.source(), c.triggerReason())); }
     public OperationalTask handle(CompleteOperationalTaskCommand c) { OperationalTask t = repository.findById(c.taskId()).orElseThrow(() -> new IllegalArgumentException("Task not found")); t.complete(); return repository.save(t); }
 }

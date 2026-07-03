@@ -6,6 +6,7 @@ import com.retailpulse.platform.trafficanalytics.infrastructure.persistence.jpa.
 import com.retailpulse.platform.trafficanalytics.infrastructure.persistence.jpa.repositories.ZoneMetricPersistenceRepository;
 import org.springframework.stereotype.Repository;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public class ZoneMetricRepositoryImpl implements ZoneMetricRepository {
@@ -14,5 +15,6 @@ public class ZoneMetricRepositoryImpl implements ZoneMetricRepository {
     public ZoneMetricRepositoryImpl(ZoneMetricPersistenceRepository repository) { this.repository = repository; }
     public ZoneMetric save(ZoneMetric metric) { return assembler.toDomain(repository.save(assembler.toEntity(metric))); }
     public List<ZoneMetric> findAll() { return repository.findAll().stream().map(assembler::toDomain).toList(); }
+    public Optional<ZoneMetric> findByZoneId(Long zoneId) { return repository.findByZoneId(zoneId).map(assembler::toDomain); }
     public long count() { return repository.count(); }
 }

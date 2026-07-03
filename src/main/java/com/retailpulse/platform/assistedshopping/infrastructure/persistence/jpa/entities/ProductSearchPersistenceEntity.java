@@ -20,6 +20,8 @@ public class ProductSearchPersistenceEntity extends AuditableAbstractPersistence
     @Enumerated(EnumType.STRING)
     private SearchResultStatus status;
 
+    private String action;
+
     public ProductSearchPersistenceEntity() {
     }
 
@@ -55,5 +57,12 @@ public class ProductSearchPersistenceEntity extends AuditableAbstractPersistence
         this.status = status;
     }
 
+    public String getAction() {
+        return action;
+    }
+
+    public void setAction(String action) {
+        this.action = action;
+    }
 
 }

@@ -5,5 +5,5 @@ import com.retailpulse.platform.storeoperations.domain.model.valueobjects.Priori
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
-public record CreateOperationalAlertResource(@NotNull Long storeId, @NotBlank String title, String description, @NotNull AlertType type, @NotNull PriorityLevel priority) {
+public record CreateOperationalAlertResource(@NotNull Long storeId, @NotBlank String title, String description, @NotNull AlertType type, @NotNull PriorityLevel priority, Long productId, Long zoneId, String source, String triggerReason) {
 }

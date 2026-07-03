@@ -7,6 +7,7 @@ import java.util.Optional;
 public interface SaasAccountRepository {
     SaasAccount save(SaasAccount account);
     Optional<SaasAccount> findById(Long accountId);
+    Optional<SaasAccount> findByOwnerEmail(String ownerEmail);
     Optional<SaasAccount> findFirst();
     long count();
 }

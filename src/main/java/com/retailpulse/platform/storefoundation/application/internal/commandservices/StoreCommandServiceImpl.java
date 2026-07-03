@@ -3,6 +3,7 @@ package com.retailpulse.platform.storefoundation.application.internal.commandser
 import com.retailpulse.platform.storefoundation.application.commandservices.StoreCommandService;
 import com.retailpulse.platform.storefoundation.domain.model.aggregates.Store;
 import com.retailpulse.platform.storefoundation.domain.model.commands.CreateStoreCommand;
+import com.retailpulse.platform.storefoundation.domain.model.commands.UpdateStoreCommand;
 import com.retailpulse.platform.storefoundation.domain.repositories.StoreRepository;
 import org.springframework.stereotype.Service;
 
@@ -10,5 +11,10 @@ import org.springframework.stereotype.Service;
 public class StoreCommandServiceImpl implements StoreCommandService {
     private final StoreRepository repository;
     public StoreCommandServiceImpl(StoreRepository repository) { this.repository = repository; }
-    public Store handle(CreateStoreCommand command) { return repository.save(new Store(null, command.name(), command.address())); }
+    public Store handle(CreateStoreCommand command) { return repository.save(new Store(null, command.name(), command.address(), command.managerName(), command.status())); }
+    public Store handle(UpdateStoreCommand command) {
+        Store store = repository.findById(command.storeId()).orElseThrow(() -> new IllegalArgumentException("Store not found"));
+        store.updateProfile(command.name(), command.address(), command.managerName(), command.status());
+        return repository.save(store);
+    }
 }

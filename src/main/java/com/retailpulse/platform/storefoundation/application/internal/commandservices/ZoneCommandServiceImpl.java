@@ -11,10 +11,10 @@ import org.springframework.stereotype.Service;
 public class ZoneCommandServiceImpl implements ZoneCommandService {
     private final ZoneRepository repository;
     public ZoneCommandServiceImpl(ZoneRepository repository) { this.repository = repository; }
-    public Zone handle(CreateZoneCommand command) { return repository.save(new Zone(null, command.storeId(), command.name(), command.type(), command.capacity())); }
+    public Zone handle(CreateZoneCommand command) { return repository.save(new Zone(null, command.storeId(), command.name(), command.type(), command.capacity(), command.x(), command.y(), command.width(), command.height())); }
     public Zone handle(UpdateZoneCommand command) {
         Zone zone = repository.findById(command.zoneId()).orElseThrow(() -> new IllegalArgumentException("Zone not found"));
-        zone.update(command.name(), command.type(), command.capacity());
+        zone.update(command.name(), command.type(), command.capacity(), command.x(), command.y(), command.width(), command.height());
         return repository.save(zone);
     }
     public void delete(Long zoneId) { repository.deleteById(zoneId); }

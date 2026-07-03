@@ -1,0 +1,40 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: retailpulse-postgres
+    environment:
+      POSTGRES_DB: retailpulse
+      POSTGRES_USER: retailpulse_user
+      POSTGRES_PASSWORD: retailpulse_password
+    ports:
+      - "5433:5432"
+    volumes:
+      - retailpulse-postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U retailpulse_user -d retailpulse"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: retailpulse-backend:local
+    container_name: retailpulse-api
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      SPRING_PROFILES_ACTIVE: dev
+      PORT: 8080
+      DB_URL: jdbc:postgresql://postgres:5432/retailpulse
+      DB_USERNAME: retailpulse_user
+      DB_PASSWORD: retailpulse_password
+      JPA_DDL_AUTO: update
+      CORS_ALLOWED_ORIGINS: http://localhost:4200,http://localhost:5173,https://polite-sea-0e075210f.7.azurestaticapps.net
+    ports:
+      - "8080:8080"
+
+volumes:
+  retailpulse-postgres-data:

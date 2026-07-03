@@ -18,7 +18,7 @@ public class SaasAccountsController {
     private final SaasAccountQueryService queryService;
     public SaasAccountsController(SaasAccountCommandService commandService, SaasAccountQueryService queryService) { this.commandService = commandService; this.queryService = queryService; }
     @GetMapping("/current") @Operation(summary = "Get current SaaS account")
-    public ResponseEntity<SaasAccountResource> current() { return queryService.getCurrent().map(SaasAccountResourceFromEntityAssembler::toResource).map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build()); }
+    public ResponseEntity<SaasAccountResource> current(@RequestHeader(value = "X-Owner-Email", required = false) String ownerEmail) { return queryService.getCurrent(ownerEmail).map(SaasAccountResourceFromEntityAssembler::toResource).map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build()); }
     @GetMapping("/{accountId}") @Operation(summary = "Get SaaS account by id")
     public ResponseEntity<SaasAccountResource> byId(@PathVariable Long accountId) { return queryService.getById(accountId).map(SaasAccountResourceFromEntityAssembler::toResource).map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build()); }
     @PostMapping @Operation(summary = "Create SaaS account")

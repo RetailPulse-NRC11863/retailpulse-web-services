@@ -11,5 +11,11 @@ public class SaasAccountQueryServiceImpl implements SaasAccountQueryService {
     private final SaasAccountRepository repository;
     public SaasAccountQueryServiceImpl(SaasAccountRepository repository) { this.repository = repository; }
     public Optional<SaasAccount> getCurrent() { return repository.findFirst(); }
+    public Optional<SaasAccount> getCurrent(String ownerEmail) {
+        if (ownerEmail != null && !ownerEmail.isBlank()) {
+            return repository.findByOwnerEmail(ownerEmail).or(this::getCurrent);
+        }
+        return getCurrent();
+    }
     public Optional<SaasAccount> getById(Long accountId) { return repository.findById(accountId); }
 }

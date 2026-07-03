@@ -7,7 +7,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
-    @Value("${retailpulse.cors.allowed-origins:http://localhost:4200,https://retailpulse-web-application.vercel.app}")
+    @Value("${retailpulse.cors.allowed-origins:http://localhost:4200,https://polite-sea-0e075210f.7.azurestaticapps.net}")
     private String[] allowedOrigins;
 
     @Override

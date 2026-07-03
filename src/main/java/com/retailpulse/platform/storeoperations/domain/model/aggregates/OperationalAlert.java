@@ -12,11 +12,19 @@ public class OperationalAlert extends AuditableAbstractAggregateRoot {
     private AlertType type;
     private AlertStatus status;
     private PriorityLevel priority;
+    private Long productId;
+    private Long zoneId;
+    private String source;
+    private String triggerReason;
 
     public OperationalAlert() {
     }
 
     public OperationalAlert(Long id, Long storeId, String title, String description, AlertType type, AlertStatus status, PriorityLevel priority) {
+        this(id, storeId, title, description, type, status, priority, null, null, "MANUAL", description);
+    }
+
+    public OperationalAlert(Long id, Long storeId, String title, String description, AlertType type, AlertStatus status, PriorityLevel priority, Long productId, Long zoneId, String source, String triggerReason) {
         setId(id);
         this.storeId = storeId;
         this.title = title;
@@ -24,6 +32,10 @@ public class OperationalAlert extends AuditableAbstractAggregateRoot {
         this.type = type;
         this.status = status;
         this.priority = priority;
+        this.productId = productId;
+        this.zoneId = zoneId;
+        this.source = source;
+        this.triggerReason = triggerReason;
     }
 
     public Long getStoreId() {
@@ -74,6 +86,37 @@ public class OperationalAlert extends AuditableAbstractAggregateRoot {
         this.priority = priority;
     }
 
+    public Long getProductId() {
+        return productId;
+    }
+
+    public void setProductId(Long productId) {
+        this.productId = productId;
+    }
+
+    public Long getZoneId() {
+        return zoneId;
+    }
+
+    public void setZoneId(Long zoneId) {
+        this.zoneId = zoneId;
+    }
+
+    public String getSource() {
+        return source;
+    }
+
+    public void setSource(String source) {
+        this.source = source;
+    }
+
+    public String getTriggerReason() {
+        return triggerReason;
+    }
+
+    public void setTriggerReason(String triggerReason) {
+        this.triggerReason = triggerReason;
+    }
 
     public void resolve() { this.status = AlertStatus.RESOLVED; }
 

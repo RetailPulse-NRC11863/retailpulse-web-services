@@ -8,16 +8,22 @@ public class ProductSearch extends AuditableAbstractAggregateRoot {
     private String query;
     private Long productId;
     private SearchResultStatus status;
+    private String action;
 
     public ProductSearch() {
     }
 
     public ProductSearch(Long id, Long sessionId, String query, Long productId, SearchResultStatus status) {
+        this(id, sessionId, query, productId, status, "SEARCHED");
+    }
+
+    public ProductSearch(Long id, Long sessionId, String query, Long productId, SearchResultStatus status, String action) {
         setId(id);
         this.sessionId = sessionId;
         this.query = query;
         this.productId = productId;
         this.status = status;
+        this.action = action;
     }
 
     public Long getSessionId() {
@@ -52,5 +58,12 @@ public class ProductSearch extends AuditableAbstractAggregateRoot {
         this.status = status;
     }
 
+    public String getAction() {
+        return action;
+    }
+
+    public void setAction(String action) {
+        this.action = action;
+    }
 
 }
